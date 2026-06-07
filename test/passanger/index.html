@@ -115,6 +115,57 @@
             border-radius: 2px;
         }
 
+        .manufacturer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .manufacturer-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 5px solid #ff6b35;
+            text-align: center;
+        }
+
+        .manufacturer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .manufacturer-card h3 {
+            color: #ff6b35;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .manufacturer-card p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .manufacturer-card a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .manufacturer-card a:hover {
+            background: #d84315;
+            transform: translateY(-2px);
+        }
+
         .aircraft-card {
             background: white;
             border-radius: 15px;
@@ -263,6 +314,10 @@
             .aircraft-card {
                 padding: 20px;
             }
+
+            .manufacturer-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @keyframes slideInUp {
@@ -290,7 +345,8 @@
 
 <nav>
     <a href="#history">📚 Історія</a>
-    <a href="#aircraft">✈️ Літаки</a>
+    <a href="#aircraft">✈️ Класика</a>
+    <a href="#manufacturers">🏭 Виробники</a>
     <a href="#facts">💡 Факти</a>
 </nav>
 
@@ -305,7 +361,7 @@
 </section>
 
 <section id="aircraft">
-    <h2>Пасажирські літаки в історії</h2>
+    <h2>Класичні пасажирські літаки</h2>
 
     <div class="aircraft-card">
         <h3>🎯 Douglas DC-3</h3>
@@ -448,6 +504,43 @@
     </div>
 </section>
 
+<section id="manufacturers">
+    <h2>Виробники пасажирських літаків</h2>
+    <p style="text-align: center; margin-bottom: 40px;">Вибирайте виробника, щоб дізнатися про його флот:</p>
+    
+    <div class="manufacturer-grid">
+        <div class="manufacturer-card">
+            <h3>✈️ Boeing</h3>
+            <p>Легендарна американська авіаційна компанія з історією більше ніж 100 років.</p>
+            <a href="boeing.html">Дізнатися більше (10 моделей)</a>
+        </div>
+
+        <div class="manufacturer-card">
+            <h3>🌍 Airbus</h3>
+            <p>Європейський гігант авіаційної промисловості, лідер у виробництві широкофюзеляжних літаків.</p>
+            <a href="airbus.html">Дізнатися більше (10 моделей)</a>
+        </div>
+
+        <div class="manufacturer-card">
+            <h3>🛩️ Douglas</h3>
+            <p>Історична американська компанія, піонер комерційної авіації та інноваціонних технологій.</p>
+            <a href="douglas.html">Дізнатися більше (10 моделей)</a>
+        </div>
+
+        <div class="manufacturer-card">
+            <h3>💎 Gulfstream</h3>
+            <p>Спеціалізація на бізнес-джетах і приватних авіалайнерах для елітних пасажирів.</p>
+            <a href="gulfstream.html">Дізнатися більше (10 моделей)</a>
+        </div>
+
+        <div class="manufacturer-card">
+            <h3>🚀 Embraer</h3>
+            <p>Бразильська авіаційна компанія, лідер у виробництві регіональних комерційних літаків.</p>
+            <a href="embraer.html">Дізнатися більше (10 моделей)</a>
+        </div>
+    </div>
+</section>
+
 <section id="facts">
     <h2>💡 Цікаві факти про пасажирські літаки</h2>
     
@@ -479,7 +572,7 @@
 
         <div class="fact-card">
             <h4>✈️ Паралельні трасування</h4>
-            <p>Сучасні літаки можуть літати на відстані лише 1000 км один від одного завдяки передовим системам управління повітряним рухом.</p>
+            <p>Сучасні літаки можуть літати на відстані лише 1000 км один від одного завдяки передовим системам управління.</p>
         </div>
 
         <div class="fact-card">
