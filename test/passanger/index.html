@@ -166,76 +166,6 @@
             transform: translateY(-2px);
         }
 
-        .aircraft-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 5px solid #ff6b35;
-        }
-
-        .aircraft-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .aircraft-card h3 {
-            color: #ff6b35;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-
-        .aircraft-card .year {
-            color: #f7931e;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 12px;
-        }
-
-        .aircraft-card p {
-            color: #666;
-            font-size: 1em;
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
-
-        .properties {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border-left: 4px solid #f7931e;
-        }
-
-        .properties h4 {
-            color: #ff6b35;
-            margin-bottom: 12px;
-            font-size: 1.1em;
-        }
-
-        .property {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .property:last-child {
-            border-bottom: none;
-        }
-
-        .property-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .property-value {
-            color: #f7931e;
-            font-weight: 600;
-        }
-
         .facts-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -311,10 +241,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .aircraft-card {
-                padding: 20px;
-            }
-
             .manufacturer-grid {
                 grid-template-columns: 1fr;
             }
@@ -345,7 +271,6 @@
 
 <nav>
     <a href="#history"> Історія</a>
-    <a href="#aircraft"> Класика</a>
     <a href="#manufacturers"> Виробники</a>
     <a href="#facts"> Факти</a>
 </nav>
@@ -358,150 +283,6 @@
         що можуть перевозити понад 800 пасажирів на надзвукових швидкостях. Сьогодні авіація є невід'ємною частиною
         глобальної системи транспорту, з'єднуючи людей та континенти.
     </p>
-</section>
-
-<section id="aircraft">
-    <h2>Класичні пасажирські літаки</h2>
-
-    <div class="aircraft-card">
-        <h3> Douglas DC-3</h3>
-        <div class="year">Перший політ: 1935 року</div>
-        <p>
-            Один з найвпливовіших літаків всіх часів. DC-3 революціонізував комерційну авіацію і часто називається
-            найкращим літаком, коли-небудь побудованим. Деякі DC-3 все ще літають сьогодні!
-        </p>
-        <div class="properties">
-            <h4> Характеристики:</h4>
-            <div class="property">
-                <span class="property-name">Пасажирів:</span>
-                <span class="property-value">21-32</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Крейсерська швидкість:</span>
-                <span class="property-value">290 км/год</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Дальність:</span>
-                <span class="property-value">2414 км</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Стелю:</span>
-                <span class="property-value">6400 м</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="aircraft-card">
-        <h3> Boeing 707</h3>
-        <div class="year">Перший політ: 1957 року</div>
-        <p>
-            Перший комерційний реактивний лайнер, який змінив авіацію назавжди. Boeing 707 скоротив час
-            трансатлантичних перельотів з 15 годин до 8 годин і зробив авіацію доступною для мас.
-        </p>
-        <div class="properties">
-            <h4> Характеристики:</h4>
-            <div class="property">
-                <span class="property-name">Пасажирів:</span>
-                <span class="property-value">140-189</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Крейсерська швидкість:</span>
-                <span class="property-value">907 км/год</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Дальність:</span>
-                <span class="property-value">9850 км</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Стелю:</span>
-                <span class="property-value">12500 м</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="aircraft-card">
-        <h3> Boeing 747 "Джамбо-джет"</h3>
-        <div class="year">Перший політ: 1969 року</div>
-        <p>
-            Революційний широкофюзеляжний літак, який був найбільшим комерційним літаком світу протягом 38 років.
-            Його характерна горб-подібна верхня палуба і чотири двигуни робили його іконічним символом авіації.
-        </p>
-        <div class="properties">
-            <h4> Характеристики:</h4>
-            <div class="property">
-                <span class="property-name">Пасажирів:</span>
-                <span class="property-value">366-524</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Крейсерська швидкість:</span>
-                <span class="property-value">907 км/год</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Дальність:</span>
-                <span class="property-value">13450 км</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Стелю:</span>
-                <span class="property-value">13716 м</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="aircraft-card">
-        <h3> Airbus A380</h3>
-        <div class="year">Перший політ: 2005 року</div>
-        <p>
-            Найбільший пасажирський авіалайнер у світі. Величезний двопалубний літак може перевезти до 853 пасажирів.
-            A380 є фінальною еволюцією концепції супер-джамбо-лайнера, пропонуючи неперевершену розкіш і комфорт.
-        </p>
-        <div class="properties">
-            <h4> Характеристики:</h4>
-            <div class="property">
-                <span class="property-name">Пасажирів:</span>
-                <span class="property-value">525-853</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Крейсерська швидкість:</span>
-                <span class="property-value">903 км/год</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Дальність:</span>
-                <span class="property-value">15000 км</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Стелю:</span>
-                <span class="property-value">13100 м</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="aircraft-card">
-        <h3> Boeing 787 Dreamliner</h3>
-        <div class="year">Перший політ: 2013 року</div>
-        <p>
-            Революційний літак з композитним корпусом, заповненим більшим вікнами і низьким тиском у кабіні.
-            Економічніший і комфортніший, він змінює стандарти довгих перельотів.
-        </p>
-        <div class="properties">
-            <h4> Характеристики:</h4>
-            <div class="property">
-                <span class="property-name">Пасажирів:</span>
-                <span class="property-value">242-330</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Крейсерська швидкість:</span>
-                <span class="property-value">908 км/год</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Дальність:</span>
-                <span class="property-value">15000 км</span>
-            </div>
-            <div class="property">
-                <span class="property-name">Стелю:</span>
-                <span class="property-value">13100 м</span>
-            </div>
-        </div>
-    </div>
 </section>
 
 <section id="manufacturers">
