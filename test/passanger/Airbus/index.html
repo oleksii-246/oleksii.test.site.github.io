@@ -644,15 +644,15 @@
             .then((response) => response.ok ? response.json() : Promise.reject())
             .then((data) => {
                 const planes = Array.isArray(data?.ac) ? data.ac.filter((plane) => plane && plane.hex) : [];
-                if (!planes.length) {
+                const selectedHex = planes.length ? planes[0].hex : null;
+
+                if (!selectedHex) {
                     window.open(fallbackUrl, '_blank', 'noopener');
                     return;
                 }
 
-                const randomIndex = Math.floor(Math.random() * planes.length);
-                const selectedHex = planes[randomIndex].hex;
                 const hexes = getHexArray(card);
-                const merged = Array.from(new Set([...hexes, selectedHex]));
+                const merged = Array.from(new Set([selectedHex, ...hexes]));
                 card.dataset.hex = JSON.stringify(merged);
 
                 window.open(`${mapBaseUrl}?search=${encodeURIComponent(selectedHex)}`, '_blank', 'noopener');
