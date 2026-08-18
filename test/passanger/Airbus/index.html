@@ -628,7 +628,17 @@
 
     function openMapForType(card) {
         const aircraftType = card.dataset.type || 'A320';
-        const fallbackUrl = `${mapBaseUrl}?icao=${encodeURIComponent(aircraftType)}`;
+        const fallbackUrl = `${mapBaseUrl}?search=${encodeURIComponent(aircraftType)}`;
+        const popup = window.open('about:blank', '_blank', 'noopener,noreferrer');
+
+        const openUrl = (url) => {
+            if (popup) {
+                popup.location.href = url;
+                return;
+            }
+
+            window.open(url, '_blank', 'noopener');
+        };
 
         fetch(`https://api.adsb.lol/v2/type/${encodeURIComponent(aircraftType)}`)
             .then((response) => response.ok ? response.json() : Promise.reject())
@@ -637,14 +647,14 @@
                 const selectedHex = planes.length ? planes[0].hex : null;
 
                 if (!selectedHex) {
-                    window.open(fallbackUrl, '_blank', 'noopener');
+                    openUrl(fallbackUrl);
                     return;
                 }
 
-                window.open(`${mapBaseUrl}?icao=${encodeURIComponent(selectedHex)}`, '_blank', 'noopener');
+                openUrl(`${mapBaseUrl}?search=${encodeURIComponent(selectedHex)}`);
             })
             .catch(() => {
-                window.open(fallbackUrl, '_blank', 'noopener');
+                openUrl(fallbackUrl);
             });
     }
 
