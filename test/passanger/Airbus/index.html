@@ -348,7 +348,7 @@
 <section id="aircraft">
     <h2> Найвідоміші моделеі Airbus</h2>
 
-    <div class="aircraft-card" data-hex="4cadc1">
+    <div class="aircraft-card" data-type="A320" data-hex='["4cadc1","4ca64d","4ca7ef"]'>
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/IndiGo_Airbus_A320neo_F-WWDG_%28to_VT-ITI%29_%2828915135713%29.jpg" alt="Boeing 247">
         </div>
@@ -381,7 +381,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca64d">
+    <div class="aircraft-card" data-type="A380" data-hex='["4ca64d","4ca7ad","4ca890"]'>
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a380-1.jpg" alt="Boeing 707">
         </div>
@@ -414,7 +414,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca4d2">
+    <div class="aircraft-card" data-type="A350" data-hex='["4ca4d2","4ca9db","4ca932"]'>
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/F-WWCF_A350_LBG_SIAE_2015_%2818953559366%29.jpg" alt="Boeing 727">
         </div>
@@ -447,7 +447,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca7ad">
+    <div class="aircraft-card" data-type="A330" data-hex='["4ca7ad","4ca9a1","4ca7ef"]'>
         <div class="aircraft-image">
             <img src="https://www.iberia.com/wcs/imagenes/experiencia_iberia/flota/flota_iberia/A330-200/A330_200_1.jpg" alt="Airbus 330">
         </div>
@@ -480,7 +480,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca890">
+    <div class="aircraft-card" data-type="A340" data-hex='["4ca890","4ca7b2","4cb021"]'>
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Airbus_A340-311%2C_Lufthansa_AN1936774.jpg/250px-Airbus_A340-311%2C_Lufthansa_AN1936774.jpg" alt="Boeing 757">
         </div>
@@ -513,7 +513,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca9db">
+    <div class="aircraft-card" data-type="A310" data-hex='["4ca9db","4ca932","4ca7ef"]'>
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Lufthansa_Express_Airbus_A310-300_Haafke.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=original" alt="Boeing 767">
         </div>
@@ -546,7 +546,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca932">
+    <div class="aircraft-card" data-type="A300" data-hex='["4ca932","4ca64d","4ca7a5"]'>
         <div class="aircraft-image">
             <img src="https://i2.wp.com/newsavia.com/wp-content/uploads/2017/05/UPS_A300_N142UP.jpg?fit=900%2C618&ssl=1" alt="Boeing 777">
         </div>
@@ -579,7 +579,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca7ef">
+    <div class="aircraft-card" data-type="A318" data-hex='["4ca7ef","4ca64d","4ca890"]'>
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a318-1.jpg" alt="Boeing 787 Dreamliner">
         </div>
@@ -626,39 +626,58 @@
 <script>
     const mapBaseUrl = 'https://adsb.lol/';
 
-    function openMapForHex(hex) {
-        const safeHex = String(hex || '').trim().toLowerCase();
-        const mapUrl = safeHex ? `${mapBaseUrl}?icao=${encodeURIComponent(safeHex)}` : `${mapBaseUrl}`;
+    function getHexArray(card) {
+        const value = card.dataset.hex || '[]';
+        try {
+            const parsed = JSON.parse(value);
+            return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
+        } catch {
+            return String(value).split(',').map((item) => item.trim()).filter(Boolean);
+        }
+    }
 
-        fetch(`https://api.adsb.lol/v2/icao/${encodeURIComponent(safeHex)}`)
+    function openMapForType(card) {
+        const aircraftType = card.dataset.type || 'A320';
+        const fallbackUrl = `${mapBaseUrl}?search=${encodeURIComponent(aircraftType)}`;
+
+        fetch(`https://api.adsb.lol/v2/type/${encodeURIComponent(aircraftType)}`)
             .then((response) => response.ok ? response.json() : Promise.reject())
             .then((data) => {
-                const plane = Array.isArray(data?.ac) && data.ac.length ? data.ac[0] : null;
-                const finalHex = plane && plane.hex ? plane.hex : safeHex;
-                window.open(`${mapBaseUrl}?icao=${encodeURIComponent(finalHex)}`, '_blank', 'noopener');
+                const planes = Array.isArray(data?.ac) ? data.ac.filter((plane) => plane && plane.hex) : [];
+                if (!planes.length) {
+                    window.open(fallbackUrl, '_blank', 'noopener');
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * planes.length);
+                const selectedHex = planes[randomIndex].hex;
+                const hexes = getHexArray(card);
+                const merged = Array.from(new Set([...hexes, selectedHex]));
+                card.dataset.hex = JSON.stringify(merged);
+
+                window.open(`${mapBaseUrl}?search=${encodeURIComponent(selectedHex)}`, '_blank', 'noopener');
             })
             .catch(() => {
-                window.open(mapUrl, '_blank', 'noopener');
+                window.open(fallbackUrl, '_blank', 'noopener');
             });
     }
 
     document.querySelectorAll('.aircraft-card').forEach((card) => {
-        const hexValue = card.dataset.hex || '4cadc1';
         const info = card.querySelector('.aircraft-info');
         const liveStatus = document.createElement('div');
         liveStatus.className = 'live-status';
-        liveStatus.innerHTML = '<span><span class="status-dot"></span> Exact aircraft</span><span class="live-count">Ready</span>';
+        liveStatus.innerHTML = '<span><span class="status-dot"></span> Live ADSB</span><span class="live-count">Loading…</span>';
         info.appendChild(liveStatus);
 
         const mapButton = document.createElement('button');
         mapButton.type = 'button';
         mapButton.className = 'map-button';
-        mapButton.textContent = 'Show this aircraft on map';
+        mapButton.textContent = 'Show aircraft on map';
         info.appendChild(mapButton);
 
         const onOpen = (event) => {
             if (event) event.preventDefault();
-            openMapForHex(hexValue);
+            openMapForType(card);
         };
 
         card.addEventListener('click', onOpen);
@@ -666,6 +685,23 @@
             event.stopPropagation();
             onOpen(event);
         });
+
+        const aircraftType = card.dataset.type || 'A320';
+        fetch(`https://api.adsb.lol/v2/type/${encodeURIComponent(aircraftType)}`)
+            .then((response) => response.ok ? response.json() : Promise.reject())
+            .then((data) => {
+                const count = Array.isArray(data?.ac) ? data.ac.length : 0;
+                const liveCount = card.querySelector('.live-count');
+                if (liveCount) {
+                    liveCount.textContent = `${count} live aircraft`;
+                }
+            })
+            .catch(() => {
+                const liveCount = card.querySelector('.live-count');
+                if (liveCount) {
+                    liveCount.textContent = 'API unavailable';
+                }
+            });
     });
 </script>
 
