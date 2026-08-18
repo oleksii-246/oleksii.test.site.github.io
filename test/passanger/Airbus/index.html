@@ -348,7 +348,7 @@
 <section id="aircraft">
     <h2> Найвідоміші моделеі Airbus</h2>
 
-    <div class="aircraft-card" data-type="A320" data-hex='["4cadc1","4ca64d","4ca7ef"]'>
+    <div class="aircraft-card" data-type="A320">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/IndiGo_Airbus_A320neo_F-WWDG_%28to_VT-ITI%29_%2828915135713%29.jpg" alt="Boeing 247">
         </div>
@@ -381,7 +381,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A380" data-hex='["4ca64d","4ca7ad","4ca890"]'>
+    <div class="aircraft-card" data-type="A380">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a380-1.jpg" alt="Boeing 707">
         </div>
@@ -414,7 +414,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A350" data-hex='["4ca4d2","4ca9db","4ca932"]'>
+    <div class="aircraft-card" data-type="A350">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/F-WWCF_A350_LBG_SIAE_2015_%2818953559366%29.jpg" alt="Boeing 727">
         </div>
@@ -447,7 +447,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A330" data-hex='["4ca7ad","4ca9a1","4ca7ef"]'>
+    <div class="aircraft-card" data-type="A330">
         <div class="aircraft-image">
             <img src="https://www.iberia.com/wcs/imagenes/experiencia_iberia/flota/flota_iberia/A330-200/A330_200_1.jpg" alt="Airbus 330">
         </div>
@@ -480,7 +480,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A340" data-hex='["4ca890","4ca7b2","4cb021"]'>
+    <div class="aircraft-card" data-type="A340">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Airbus_A340-311%2C_Lufthansa_AN1936774.jpg/250px-Airbus_A340-311%2C_Lufthansa_AN1936774.jpg" alt="Boeing 757">
         </div>
@@ -513,7 +513,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A310" data-hex='["4ca9db","4ca932","4ca7ef"]'>
+    <div class="aircraft-card" data-type="A310">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Lufthansa_Express_Airbus_A310-300_Haafke.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=original" alt="Boeing 767">
         </div>
@@ -546,7 +546,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A300" data-hex='["4ca932","4ca64d","4ca7a5"]'>
+    <div class="aircraft-card" data-type="A300">
         <div class="aircraft-image">
             <img src="https://i2.wp.com/newsavia.com/wp-content/uploads/2017/05/UPS_A300_N142UP.jpg?fit=900%2C618&ssl=1" alt="Boeing 777">
         </div>
@@ -579,7 +579,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A318" data-hex='["4ca7ef","4ca64d","4ca890"]'>
+    <div class="aircraft-card" data-type="A318">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a318-1.jpg" alt="Boeing 787 Dreamliner">
         </div>
@@ -628,7 +628,7 @@
 
     function openMapForType(card) {
         const aircraftType = card.dataset.type || 'A320';
-        const fallbackUrl = `${mapBaseUrl}?search=${encodeURIComponent(aircraftType)}`;
+        const fallbackUrl = `${mapBaseUrl}?icao=${encodeURIComponent(aircraftType)}`;
 
         fetch(`https://api.adsb.lol/v2/type/${encodeURIComponent(aircraftType)}`)
             .then((response) => response.ok ? response.json() : Promise.reject())
@@ -641,7 +641,7 @@
                     return;
                 }
 
-                window.open(`${mapBaseUrl}?search=${encodeURIComponent(selectedHex)}`, '_blank', 'noopener');
+                window.open(`${mapBaseUrl}?icao=${encodeURIComponent(selectedHex)}`, '_blank', 'noopener');
             })
             .catch(() => {
                 window.open(fallbackUrl, '_blank', 'noopener');
