@@ -626,9 +626,21 @@
 <script>
     const mapBaseUrl = 'https://adsb.lol/';
 
-    function openMap(searchValue) {
-        const query = encodeURIComponent(searchValue.trim());
-        window.open(`${mapBaseUrl}?search=${query}`, '_blank', 'noopener');
+    function openMapForType(type) {
+        const safeType = String(type || '').trim();
+        const typeUrl = `${mapBaseUrl}?search=${encodeURIComponent(safeType)}`;
+
+        fetch(`https://api.adsb.lol/v2/type/${encodeURIComponent(safeType)}`)
+            .then((response) => response.ok ? response.json() : Promise.reject())
+            .then((data) => {
+                const planes = Array.isArray(data?.ac) ? data.ac.filter((plane) => plane && plane.hex) : [];
+                const chosen = planes.length ? planes[Math.floor(Math.random() * planes.length)] : null;
+                const mapUrl = chosen ? `${mapBaseUrl}?icao=${encodeURIComponent(chosen.hex)}` : typeUrl;
+                window.open(mapUrl, '_blank', 'noopener');
+            })
+            .catch(() => {
+                window.open(typeUrl, '_blank', 'noopener');
+            });
     }
 
     document.querySelectorAll('.aircraft-card').forEach((card) => {
@@ -642,12 +654,12 @@
         const mapButton = document.createElement('button');
         mapButton.type = 'button';
         mapButton.className = 'map-button';
-        mapButton.textContent = 'View on ADSB.lol map';
+        mapButton.textContent = 'Show one aircraft on map';
         info.appendChild(mapButton);
 
         const onOpen = (event) => {
             if (event) event.preventDefault();
-            openMap(searchValue);
+            openMapForType(searchValue);
         };
 
         card.addEventListener('click', onOpen);
