@@ -634,7 +634,7 @@
             .then((response) => response.ok ? response.json() : Promise.reject())
             .then((data) => {
                 const planes = Array.isArray(data?.ac) ? data.ac.filter((plane) => plane && plane.hex) : [];
-                const chosen = planes.length ? planes[Math.floor(Math.random() * planes.length)] : null;
+                const chosen = planes.length ? planes[0] : null;
                 const mapUrl = chosen ? `${mapBaseUrl}?icao=${encodeURIComponent(chosen.hex)}` : typeUrl;
                 window.open(mapUrl, '_blank', 'noopener');
             })
