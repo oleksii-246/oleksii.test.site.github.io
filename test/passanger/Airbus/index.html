@@ -321,6 +321,67 @@
             transform: translateY(-2px);
             box-shadow: 0 12px 18px rgba(0, 75, 135, 0.25);
         }
+
+        .aircraft-count-control {
+            grid-column: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 44px;
+        }
+
+        .count-button {
+            border: 1px solid #004b87;
+            background: white;
+            color: #004b87;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .count-button:hover:not(:disabled) {
+            background: #004b87;
+            color: white;
+        }
+
+        .count-button:disabled {
+            cursor: wait;
+            opacity: 0.7;
+        }
+
+        .count-result {
+            min-width: 88px;
+            color: #004b87;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .loading-dots span {
+            width: 6px;
+            height: 6px;
+            background: #9aa3ad;
+            border-radius: 50%;
+            animation: countDot 1s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(2) { animation-delay: 0.1s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(4) { animation-delay: 0.3s; }
+        .loading-dots span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes countDot {
+            0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-3px); }
+        }
     </style>
 </head>
 <body>
@@ -348,7 +409,7 @@
 <section id="aircraft">
     <h2> Найвідоміші моделеі Airbus</h2>
 
-    <div class="aircraft-card" data-type="A32[01]|A20N|A21N" data-hex="4cadc1">
+    <div class="aircraft-card" data-type="A32[01]|A20N|A21N" data-api-type="A320" data-hex="4cadc1">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/IndiGo_Airbus_A320neo_F-WWDG_%28to_VT-ITI%29_%2828915135713%29.jpg" alt="Boeing 247">
         </div>
@@ -381,7 +442,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A38[08]" data-hex="4ca64d">
+    <div class="aircraft-card" data-type="A38[08]" data-api-type="A380" data-hex="4ca64d">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a380-1.jpg" alt="Boeing 707">
         </div>
@@ -414,7 +475,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A35[01K]" data-hex="4ca4d2">
+    <div class="aircraft-card" data-type="A35[01K]" data-api-type="A350" data-hex="4ca4d2">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/F-WWCF_A350_LBG_SIAE_2015_%2818953559366%29.jpg" alt="Boeing 727">
         </div>
@@ -447,7 +508,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A33[0123]" data-hex="4ca7ad">
+    <div class="aircraft-card" data-type="A33[0123]" data-api-type="A330" data-hex="4ca7ad">
         <div class="aircraft-image">
             <img src="https://www.iberia.com/wcs/imagenes/experiencia_iberia/flota/flota_iberia/A330-200/A330_200_1.jpg" alt="Airbus 330">
         </div>
@@ -480,7 +541,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A34[012356]" data-hex="4ca890">
+    <div class="aircraft-card" data-type="A34[012356]" data-api-type="A340" data-hex="4ca890">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Airbus_A340-311%2C_Lufthansa_AN1936774.jpg/250px-Airbus_A340-311%2C_Lufthansa_AN1936774.jpg" alt="Boeing 757">
         </div>
@@ -513,7 +574,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A31[02]" data-hex="4ca9db">
+    <div class="aircraft-card" data-type="A31[02]" data-api-type="A310" data-hex="4ca9db">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Lufthansa_Express_Airbus_A310-300_Haafke.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=original" alt="Boeing 767">
         </div>
@@ -546,7 +607,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A30[236]" data-hex="4ca932">
+    <div class="aircraft-card" data-type="A30[236]" data-api-type="A300" data-hex="4ca932">
         <div class="aircraft-image">
             <img src="https://i2.wp.com/newsavia.com/wp-content/uploads/2017/05/UPS_A300_N142UP.jpg?fit=900%2C618&ssl=1" alt="Boeing 777">
         </div>
@@ -579,7 +640,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-type="A318" data-hex="4ca7ef">
+    <div class="aircraft-card" data-type="A318" data-api-type="A318" data-hex="4ca7ef">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a318-1.jpg" alt="Boeing 787 Dreamliner">
         </div>
@@ -625,11 +686,36 @@
 
 <script>
     const mapBaseUrl = 'https://adsb.lol/';
+    const aircraftApiBaseUrl = 'https://api.adsb.lol/v2/type/';
 
     function openMapForType(card) {
         const aircraftType = card.dataset.type || '';
         const mapUrl = aircraftType ? `${mapBaseUrl}?filterType=${encodeURIComponent(aircraftType)}` : mapBaseUrl;
         window.open(mapUrl, '_blank', 'noopener');
+    }
+
+    async function countAircraftInAir(card, button, result) {
+        const aircraftType = card.dataset.apiType;
+        if (!aircraftType) return;
+
+        button.disabled = true;
+        result.innerHTML = '<span class="loading-dots" aria-label="Counting"><span></span><span></span><span></span><span></span><span></span></span>';
+
+        try {
+            const response = await fetch(`${aircraftApiBaseUrl}${encodeURIComponent(aircraftType)}`);
+            if (!response.ok) throw new Error(`API request failed with ${response.status}`);
+
+            const data = await response.json();
+            const aircraftInAir = Array.isArray(data.ac)
+                ? data.ac.filter((aircraft) => aircraft.on_ground === false).length
+                : 0;
+            result.textContent = `${aircraftInAir} in air`;
+        } catch (error) {
+            result.textContent = 'Unavailable';
+            console.error(`Could not count ${aircraftType} aircraft`, error);
+        } finally {
+            button.disabled = false;
+        }
     }
 
     document.querySelectorAll('.aircraft-card').forEach((card) => {
@@ -654,6 +740,27 @@
         mapButton.addEventListener('click', (event) => {
             event.stopPropagation();
             onOpen(event);
+        });
+
+        const countControl = document.createElement('div');
+        countControl.className = 'aircraft-count-control';
+
+        const countButton = document.createElement('button');
+        countButton.type = 'button';
+        countButton.className = 'count-button';
+        countButton.textContent = 'Count in air';
+
+        const countResult = document.createElement('span');
+        countResult.className = 'count-result';
+        countResult.setAttribute('aria-live', 'polite');
+        countResult.textContent = 'Not counted';
+
+        countControl.append(countButton, countResult);
+        card.appendChild(countControl);
+
+        countButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            countAircraftInAir(card, countButton, countResult);
         });
     });
 </script>
