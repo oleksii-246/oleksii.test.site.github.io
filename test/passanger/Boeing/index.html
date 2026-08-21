@@ -690,9 +690,15 @@
 <script>
     const mapBaseUrl = 'https://adsb.lol/';
 
-    function openMapForType(card) {
-        const aircraftType = card.dataset.type || '';
-        const mapUrl = aircraftType ? `${mapBaseUrl}?filterType=${encodeURIComponent(aircraftType)}` : mapBaseUrl;
+    function openMapForAircraft(card) {
+        let hex = String(card.dataset.hex || '').trim();
+        try {
+            const parsed = JSON.parse(hex);
+            hex = Array.isArray(parsed) ? parsed[0] : hex;
+        } catch {
+            hex = hex.split(',')[0].trim();
+        }
+        const mapUrl = hex ? `${mapBaseUrl}?icao=${encodeURIComponent(hex)}` : mapBaseUrl;
         window.open(mapUrl, '_blank', 'noopener');
     }
 
@@ -711,7 +717,7 @@
 
         const onOpen = (event) => {
             if (event) event.preventDefault();
-            openMapForType(card);
+            openMapForAircraft(card);
         };
 
         card.addEventListener('click', onOpen);
