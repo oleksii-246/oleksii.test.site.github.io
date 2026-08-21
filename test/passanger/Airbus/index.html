@@ -348,7 +348,7 @@
 <section id="aircraft">
     <h2> Найвідоміші моделеі Airbus</h2>
 
-    <div class="aircraft-card" data-hex="4cadc1">
+    <div class="aircraft-card" data-hex="4951CA">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/IndiGo_Airbus_A320neo_F-WWDG_%28to_VT-ITI%29_%2828915135713%29.jpg" alt="Boeing 247">
         </div>
@@ -381,7 +381,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca64d">
+    <div class="aircraft-card" data-hex="896190">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a380-1.jpg" alt="Boeing 707">
         </div>
@@ -414,7 +414,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca4d2">
+    <div class="aircraft-card" data-hex="842370">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/F-WWCF_A350_LBG_SIAE_2015_%2818953559366%29.jpg" alt="Boeing 727">
         </div>
@@ -447,7 +447,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca7ad">
+    <div class="aircraft-card" data-hex="a52ea4">
         <div class="aircraft-image">
             <img src="https://www.iberia.com/wcs/imagenes/experiencia_iberia/flota/flota_iberia/A330-200/A330_200_1.jpg" alt="Airbus 330">
         </div>
@@ -480,7 +480,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca890">
+    <div class="aircraft-card" data-hex="3c6519">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Airbus_A340-311%2C_Lufthansa_AN1936774.jpg/250px-Airbus_A340-311%2C_Lufthansa_AN1936774.jpg" alt="Boeing 757">
         </div>
@@ -513,7 +513,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca9db">
+    <div class="aircraft-card" data-hex="4bcced">
         <div class="aircraft-image">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Lufthansa_Express_Airbus_A310-300_Haafke.jpg?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=original" alt="Boeing 767">
         </div>
@@ -546,7 +546,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca932">
+    <div class="aircraft-card" data-hex="3c542a">
         <div class="aircraft-image">
             <img src="https://i2.wp.com/newsavia.com/wp-content/uploads/2017/05/UPS_A300_N142UP.jpg?fit=900%2C618&ssl=1" alt="Boeing 777">
         </div>
@@ -579,7 +579,7 @@
         </div>
     </div>
 
-    <div class="aircraft-card" data-hex="4ca7ef">
+    <div class="aircraft-card" data-hex="3950cf">
         <div class="aircraft-image">
             <img src="https://images.aircharterservice.com/global/aircraft-guide/group-charter/airbus-a318-1.jpg" alt="Boeing 787 Dreamliner">
         </div>
@@ -643,14 +643,14 @@
     }
 
     document.querySelectorAll('.aircraft-card').forEach((card) => {
-        const hexValue = card.dataset.hex || '4cadc1';
+        const hexValue = card.dataset.hex || '4951CA';
         const info = card.querySelector('.aircraft-info');
         const liveStatus = document.createElement('div');
         liveStatus.className = 'live-status';
         liveStatus.innerHTML = '<span><span class="status-dot"></span> Exact aircraft</span><span class="live-count">Ready</span>';
         info.appendChild(liveStatus);
 
-        const mapButton = document.createElement('button');
+        const mapButton = document.createElement('button');і
         mapButton.type = 'button';
         mapButton.className = 'map-button';
         mapButton.textContent = 'Show this aircraft on map';
