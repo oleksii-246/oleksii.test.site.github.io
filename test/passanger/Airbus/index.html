@@ -702,14 +702,19 @@
         result.innerHTML = '<span class="loading-dots" aria-label="Counting"><span></span><span></span><span></span><span></span><span></span></span>';
 
         try {
-            const response = await fetch(`${aircraftApiBaseUrl}${encodeURIComponent(aircraftType)}`);
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 10000);
+            const response = await fetch(`${aircraftApiBaseUrl}${encodeURIComponent(aircraftType)}`, {
+                signal: controller.signal
+            });
+            clearTimeout(timeout);
             if (!response.ok) throw new Error(`API request failed with ${response.status}`);
 
             const data = await response.json();
             const aircraftCount = Array.isArray(data.ac) ? data.ac.length : 0;
             result.textContent = `${aircraftCount} aircraft`;
         } catch (error) {
-            result.textContent = 'Unavailable';
+            result.textContent = error.name === 'AbortError' ? 'Timed out' : 'Unavailable';
             console.error(`Could not count ${aircraftType} aircraft`, error);
         } finally {
             button.disabled = false;
