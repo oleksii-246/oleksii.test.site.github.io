@@ -706,10 +706,8 @@
             if (!response.ok) throw new Error(`API request failed with ${response.status}`);
 
             const data = await response.json();
-            const aircraftInAir = Array.isArray(data.ac)
-                ? data.ac.filter((aircraft) => aircraft.on_ground === false).length
-                : 0;
-            result.textContent = `${aircraftInAir} in air`;
+            const aircraftCount = Array.isArray(data.ac) ? data.ac.length : 0;
+            result.textContent = `${aircraftCount} aircraft`;
         } catch (error) {
             result.textContent = 'Unavailable';
             console.error(`Could not count ${aircraftType} aircraft`, error);
